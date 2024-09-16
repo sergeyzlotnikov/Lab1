@@ -1,0 +1,93 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Xml.Linq;
+using static System.Formats.Asn1.AsnWriter;
+
+namespace WpfApp21
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            var container;
+            var camera, scene, renderer;
+            init();
+            animate();
+            function init()
+            {
+                container = document.getElementById('container');
+                scene = new THREE.Scene();
+
+                camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 4000);
+                camera.position.set(5, 5, 5);
+                camera.lookAt(new THREE.Vector3(0, 0, 0));
+                renderer = new THREE.WebGLRenderer( { antialias: false } );
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000ff, 1);
+    container.appendChild(renderer.domElement);
+    window.addEventListener('resize', onWindowResize, false);
+function onWindowResize()
+        {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            var geometry = new THREE.Geometry();
+            geometry.vertices.push(new THREE.Vector3(1.0, 0.0, 3.0));
+            geometry.vertices.push(new THREE.Vector3(1.0, 3.0, 0.0));
+            geometry.vertices.push(new THREE.Vector3(3.0, 0.0, 1.0));
+            geometry.faces.push(new THREE.Face3(0, 1, 2));
+            geometry.faces[0].vertexColors[0] = new THREE.Color(0xff0000);
+            geometry.faces[0].vertexColors[1] = new THREE.Color(0x00ff00);
+            geometry.faces[0].vertexColors[2] = new THREE.Color(0x0000ff);
+            var triangleMaterial = new THREE.MeshBasicMaterial({
+vertexColors: THREE.VertexColors,
+    wireframe: false,
+    side: THREE.DoubleSide
+var triangleMaterial = new THREE.MeshBasicMaterial({
+vertexColors: THREE.VertexColors,
+wireframe: true,
+side: THREE.DoubleSide
+var triangleMesh = new THREE.Mesh(geometry, triangleMaterial);
+            triangleMesh.position.set(0.0, 0.0, 0.0);
+            scene.add(triangleMesh);
+            var imagedata;
+…
+var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            var img = new Image();
+
+            img.onload = function()
+{
+                canvas.width = img.width;
+                canvas.height = img.height;
+                context.drawImage(img, 0, 0);
+                imagedata = context.getImageData(0, 0, img.width, img.height);
+
+        });
+        });
+        }
+
+
+    }
+
+}
+        }
+}
